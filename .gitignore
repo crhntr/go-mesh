@@ -1,0 +1,10 @@
+.DS_Store
+medinfocentral.com/node_modules/
+medinfocentral.com/dist/
+medinfocentral.com/npm-debug.log
+medinfocentral.com/test/unit/coverage
+medinfocentral.com/test/e2e/reports
+medinfocentral.com/selenium-debug.log
+pi/product_inserts
+out/
+bin/
