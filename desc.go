@@ -33,7 +33,7 @@ type Concept struct {
 	RelatedRegistryNumbers []string `xml:"RelatedRegistryNumberList>RelatedRegistryNumber"`
 }
 
-func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, <-chan error) {
+func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, chan error) {
 	dec := xml.NewDecoder(r)
 	drc := make(chan DescriptorRecord)
 	errc := make(chan error, 2)
@@ -43,6 +43,7 @@ func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, <-chan erro
 			if err != nil {
 				errc <- err
 				close(drc)
+				return
 			}
 
 			switch t := tok.(type) {
@@ -53,6 +54,7 @@ func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, <-chan erro
 					if err := dec.DecodeElement(&dr, &t); err != nil {
 						errc <- err
 						close(drc)
+						return
 					}
 
 					drc <- dr
