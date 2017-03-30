@@ -13,5 +13,6 @@ type Term struct {
 	ThesaurusIDs     []string `xml:"ThesaurusIDlist>ThesaurusID"`
 	EntryVersion     string   `xml:"EntryVersion"`
 	Abbreviation     string   `xml:"Abbreviation"`
-	String           string   `xml:"String"`
+
+	String string `xml:"String"`
 }
