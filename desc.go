@@ -21,16 +21,7 @@ type DescriptorRecord struct {
 	PreviousIndexings []string  `xml:"PreviousIndexingList>PreviousIndexing"`
 	TreeNumbers       []string  `xml:"TreeNumberList>TreeNumber"`
 	Concepts          []Concept `xml:"ConceptList>Concept"`
-}
-
-type Concept struct {
-	PreferredConceptYN     YN
-	UI                     string
-	Name                   string `xml:"ConceptName>String"`
-	CASN1Name              string
-	RegistryNumber         string
-	ScopeNote              string
-	RelatedRegistryNumbers []string `xml:"RelatedRegistryNumberList>RelatedRegistryNumber"`
+	Terms             []Term    `xml:"TermList"`
 }
 
 func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, chan error) {
