@@ -14,7 +14,7 @@ const (
 )
 
 func (ui UI) Type() UIType {
-	if len(ui) == 0 {
+	if len(ui) < 2 {
 		return UnknownUI
 	}
 	str := string(ui)
