@@ -11,6 +11,7 @@ type Term struct {
 	RecordPreferred  YN       `xml:"RecordPreferredTermYN,attr"`
 	Created          Date     `xml:"DateCreated"`
 	ThesaurusIDs     []string `xml:"ThesaurusIDlist>ThesaurusID"`
-
-	String string `xml:"String"`
+	EntryVersion     string   `xml:"EntryVersion"`
+	Abbreviation     string   `xml:"Abbreviation"`
+	String           string   `xml:"String"`
 }
