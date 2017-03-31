@@ -19,8 +19,7 @@ func TestParsePharmacologicalActionSet(t *testing.T) {
 	count := 0
 	for {
 		select {
-		case pa := <-pac:
-			t.Logf("%d: %q", count, pa.UI)
+		case <-pac:
 			count++
 		case err := <-errc:
 			t.Logf("count: %d", count)

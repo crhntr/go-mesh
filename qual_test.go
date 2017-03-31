@@ -19,8 +19,7 @@ func TestParseQualifierRecordSet(t *testing.T) {
 	count := 0
 	for {
 		select {
-		case qr := <-qrc:
-			t.Logf("%d: %q", count, qr.UI)
+		case <-qrc:
 			count++
 		case err := <-errc:
 			t.Logf("count: %d", count)
