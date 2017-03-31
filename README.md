@@ -1,10 +1,10 @@
 # goMeSH
 
-goMeSH is a small library for parsing MeSH data files available at [https://www.nlm.nih.gov/mesh/download_mesh.html]
+goMeSH is a small library for parsing MeSH data files available at (https://www.nlm.nih.gov/mesh/download_mesh.html)
 
 The code is probably best as an an example of how to parse large xml files (using
 using only the go standard library). The functions in XMLFileParsers are based on
-the design in this article (Parsing Huge XML Files With Go)[]http://blog.davidsingleton.org/parsing-huge-xml-files-with-go/.
+the design in this article [Parsing Huge XML Files With Go](http://blog.davidsingleton.org/parsing-huge-xml-files-with-go/).
 
 ## Example
 An example of using one of the parser functions would be as follows
