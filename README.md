@@ -9,32 +9,32 @@ the design in this article (Parsing Huge XML Files With Go)[]http://blog.davidsi
 ## Example
 An example of using one of the parser functions would be as follows
 ```go
-f, err := os.Open("testdata/pa2017.xml")
-if err != nil {
-  panic(err)
-}
-
-pac, errc := gomesh.ParsePharmacologicalActionSet(f)
-
-count := 0
-for {
-  select {
-  case pa := <-pac:
-    storeSomewhere(pa)
-    count++
-  case err := <-errc:
-    if err == io.EOF {
-      log.Printf("Pharmacological Actions parsed: %d", count)
-
-      close(errc)
-      // return
-    }
-
+func () {
+  f, err := os.Open("testdata/pa2017.xml")
+  if err != nil {
     panic(err)
-    close(errc)
-    // return
   }
-}
+
+  pac, errc := gomesh.ParsePharmacologicalActionSet(f)
+  defer close(errc)
+
+
+  count := 0
+  for {
+    select {
+    case pa := <-pac:
+      doSomethingWithPharmacologicalAction(pa)
+      count++
+    case err := <-errc:
+      if err != io.EOF {
+        panic(err)
+      }
+
+      log.Printf("Pharmacological Actions parsed: %d", count)
+      return
+    }
+  }
+}()
 ```
 
 ## Notes
