@@ -5,6 +5,7 @@ import (
 	"io"
 )
 
+// ParseDescriptorRecordSet is designed to parse desc####.xml files
 func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, chan error) {
 	dec := xml.NewDecoder(r)
 	drc := make(chan DescriptorRecord)
@@ -37,6 +38,7 @@ func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, chan error)
 	return drc, errc
 }
 
+// ParsePharmacologicalActionSet is designed to parse pa####.xml files
 func ParsePharmacologicalActionSet(r io.Reader) (<-chan PharmacologicalAction, chan error) {
 	dec := xml.NewDecoder(r)
 	drc := make(chan PharmacologicalAction)
@@ -69,6 +71,7 @@ func ParsePharmacologicalActionSet(r io.Reader) (<-chan PharmacologicalAction, c
 	return drc, errc
 }
 
+// ParseQualifierRecordSet is designed to parse qual####.xml files
 func ParseQualifierRecordSet(r io.Reader) (<-chan QualifierRecord, chan error) {
 	dec := xml.NewDecoder(r)
 	qrc := make(chan QualifierRecord)
@@ -101,6 +104,7 @@ func ParseQualifierRecordSet(r io.Reader) (<-chan QualifierRecord, chan error) {
 	return qrc, errc
 }
 
+// ParseSupplementalRecordSet is designed to parse supp####.xml files
 func ParseSupplementalRecordSet(r io.Reader) (<-chan SupplementalRecord, chan error) {
 	dec := xml.NewDecoder(r)
 	drc := make(chan SupplementalRecord)
