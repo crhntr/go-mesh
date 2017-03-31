@@ -1,6 +1,7 @@
 package gomesh_test
 
 import (
+	"bytes"
 	"encoding/xml"
 	"testing"
 
@@ -34,5 +35,28 @@ func TestDate_UnmarshalXML(t *testing.T) {
 
 	if v.SomeDate.Time.Day() != 1 {
 		t.Errorf("did not parse Day properly: expected %d, got: %d", 1, v.SomeDate.Time.Day())
+	}
+}
+
+func TestDate_MarshalXML(t *testing.T) {
+	testXML := []byte(`<foo><SomeDate><Year>1999</Year><Month>07</Month><Day>01</Day></SomeDate></foo>`)
+	type Foo struct {
+		XMLName  xml.Name `xml:"foo"`
+		SomeDate gomesh.Date
+	}
+	v := Foo{}
+	if err := xml.Unmarshal(testXML, &v); err != nil {
+		t.Error(err)
+	}
+
+	resultXML, err := xml.Marshal(v)
+	if err != nil {
+		t.Error(err)
+	}
+
+	if !bytes.Equal(resultXML, testXML) {
+		t.Error("xml results should be equal")
+		t.Logf("Expected: %q", string(testXML))
+		t.Logf("Got: %q", string(resultXML))
 	}
 }

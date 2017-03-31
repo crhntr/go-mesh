@@ -2,6 +2,7 @@ package gomesh
 
 import (
 	"encoding/xml"
+	"fmt"
 	"time"
 )
 
@@ -31,13 +32,13 @@ func (date *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 
 func (date Date) MarshalXML(e *xml.Encoder, start xml.StartElement) error {
 	type dateXML struct {
-		Year  int
-		Month int
-		Day   int
+		Year  string
+		Month string
+		Day   string
 	}
 	return e.EncodeElement(&dateXML{
-		Year:  date.Year(),
-		Month: int(date.Month()),
-		Day:   date.Day(),
+		Year:  fmt.Sprintf("%0.4d", date.Year()),
+		Month: fmt.Sprintf("%0.2d", int(date.Month())),
+		Day:   fmt.Sprintf("%0.2d", date.Day()),
 	}, start)
 }
