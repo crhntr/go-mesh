@@ -5,25 +5,6 @@ import (
 	"io"
 )
 
-type DescriptorRecordSet struct {
-	XMLName xml.Name `xml:"DescriptorRecordSet"`
-}
-
-type DescriptorRecord struct {
-	UI                string `xml:"DescriptorUI"`
-	Name              string `xml:"DescriptorName"`
-	Created           Date   `xml:"DateCreated"`
-	Revised           Date   `xml:"DateRevised"`
-	Established       Date   `xml:"DateEstablished"`
-	HistoryNote       string
-	OnlineNote        string
-	PublicMeSHNote    string
-	PreviousIndexings []string  `xml:"PreviousIndexingList>PreviousIndexing"`
-	TreeNumbers       []string  `xml:"TreeNumberList>TreeNumber"`
-	Concepts          []Concept `xml:"ConceptList>Concept"`
-	Terms             []Term    `xml:"TermList"`
-}
-
 func ParseDescriptorRecordSet(r io.Reader) (<-chan DescriptorRecord, chan error) {
 	dec := xml.NewDecoder(r)
 	drc := make(chan DescriptorRecord)
