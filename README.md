@@ -7,7 +7,7 @@ using only the go standard library). The functions in XMLFileParsers are based o
 the design in this article (Parsing Huge XML Files With Go)[]http://blog.davidsingleton.org/parsing-huge-xml-files-with-go/.
 
 ## Example
-An example of using one of the parser functions would be as followed:
+An example of using one of the parser functions would be as follows
 ```go
 f, err := os.Open("testdata/pa2017.xml")
 if err != nil {
@@ -23,14 +23,16 @@ for {
     storeSomewhere(pa)
     count++
   case err := <-errc:
-    log.Printf("Pharmacological Actions parsed: %d", count)
     if err == io.EOF {
+      log.Printf("Pharmacological Actions parsed: %d", count)
+
       close(errc)
-      return
+      // return
     }
+
     panic(err)
     close(errc)
-    return
+    // return
   }
 }
 ```
