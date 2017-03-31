@@ -1,6 +1,6 @@
-# gomesh
+# goMeSH
 
-GoMeSH is a small library for parsing MeSH data files.
+goMeSH is a small library for parsing MeSH data files available at [https://www.nlm.nih.gov/mesh/download_mesh.html]
 
 The code is probably best as an an example of how to parse large xml files (using
 using only the go standard library). The functions in XMLFileParsers are based on
