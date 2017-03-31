@@ -8,6 +8,79 @@ import (
 	"github.com/crhntr/gomesh"
 )
 
+func TestParseDescriptorRecordSet(t *testing.T) {
+	f, err := os.Open("testdata/desc2017.xml")
+	if err != nil {
+		t.Error(err)
+	}
+
+	drc, errc := gomesh.ParseDescriptorRecordSet(f)
+
+	count := 0
+	done := false
+	for !done {
+		if testing.Short() && count > 100 {
+			return
+		}
+		if testing.Verbose() && count > 1000 {
+			return
+		}
+		if !testing.Verbose() && !testing.Short() && count > 200 {
+			return
+		}
+
+		select {
+		case <-drc:
+			count++
+		case err := <-errc:
+			if err == io.EOF {
+				close(errc)
+				done = true
+				break
+			} else {
+				t.Error(err)
+				close(errc)
+			}
+		}
+	}
+}
+
+func TestParsePharmacologicalActionSet(t *testing.T) {
+	f, err := os.Open("testdata/pa2017.xml")
+	if err != nil {
+		t.Error(err)
+	}
+
+	pac, errc := gomesh.ParsePharmacologicalActionSet(f)
+
+	count := 0
+	for {
+		if testing.Short() && count > 100 {
+			return
+		}
+		if testing.Verbose() && count > 1000 {
+			return
+		}
+		if !testing.Verbose() && !testing.Short() && count > 200 {
+			return
+		}
+
+		select {
+		case <-pac:
+			count++
+		case err := <-errc:
+			t.Logf("count: %d", count)
+			if err == io.EOF {
+				close(errc)
+				return
+			}
+			t.Error(err)
+			close(errc)
+			return
+		}
+	}
+}
+
 func TestSupplementalRecordSet(t *testing.T) {
 	f, err := os.Open("testdata/supp2017.xml")
 	if err != nil {
@@ -95,6 +168,42 @@ func TestSupplementalRecordSet(t *testing.T) {
 				return
 			}
 		case err := <-errc:
+			if err == io.EOF {
+				close(errc)
+				return
+			}
+			t.Error(err)
+			close(errc)
+			return
+		}
+	}
+}
+
+func TestParseQualifierRecordSet(t *testing.T) {
+	f, err := os.Open("testdata/qual2017.xml")
+	if err != nil {
+		t.Error(err)
+	}
+
+	qrc, errc := gomesh.ParseQualifierRecordSet(f)
+
+	count := 0
+	for {
+		if testing.Short() && count > 100 {
+			return
+		}
+		if testing.Verbose() && count > 1000 {
+			return
+		}
+		if !testing.Verbose() && !testing.Short() && count > 200 {
+			return
+		}
+
+		select {
+		case <-qrc:
+			count++
+		case err := <-errc:
+			t.Logf("count: %d", count)
 			if err == io.EOF {
 				close(errc)
 				return
