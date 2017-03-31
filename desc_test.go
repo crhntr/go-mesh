@@ -18,7 +18,17 @@ func TestParseDescriptorRecordSet(t *testing.T) {
 
 	count := 0
 	done := false
-	for !done && count < 1000 {
+	for !done {
+		if testing.Short() && count > 100 {
+			return
+		}
+		if testing.Verbose() && count > 1000 {
+			return
+		}
+		if !testing.Verbose() && !testing.Short() && count > 200 {
+			return
+		}
+
 		select {
 		case <-drc:
 			count++
@@ -33,5 +43,4 @@ func TestParseDescriptorRecordSet(t *testing.T) {
 			}
 		}
 	}
-	t.Log(count)
 }

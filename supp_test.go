@@ -21,6 +21,16 @@ func TestSupplementalRecordSet(t *testing.T) {
 	src, errc := gomesh.ParseSupplementalRecordSet(f)
 	count := 0
 	for {
+		if testing.Short() && count > 100 {
+			return
+		}
+		if testing.Verbose() && count > 1000 {
+			return
+		}
+		if !testing.Verbose() && !testing.Short() && count > 200 {
+			return
+		}
+
 		select {
 		case sr := <-src:
 			count++
@@ -85,7 +95,6 @@ func TestSupplementalRecordSet(t *testing.T) {
 				return
 			}
 		case err := <-errc:
-			t.Logf("count: %d", count)
 			if err == io.EOF {
 				close(errc)
 				return
