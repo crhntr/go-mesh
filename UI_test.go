@@ -1,4 +1,4 @@
-package gomesh_test
+package mesh_test
 
 import (
 	"encoding/xml"

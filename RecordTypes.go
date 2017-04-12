@@ -1,4 +1,4 @@
-package gomesh
+package mesh
 
 // SupplementalRecords are parsed from supp####.xml files
 type SupplementalRecord struct {

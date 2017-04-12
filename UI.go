@@ -1,4 +1,4 @@
-package gomesh
+package mesh
 
 type UI string
 

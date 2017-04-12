@@ -1,4 +1,4 @@
-package gomesh
+package mesh
 
 type AllowableQualifier struct {
 	UI   UI     `xml:"QualifierReferredTo>QualifierUI"`

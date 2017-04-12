@@ -1,4 +1,4 @@
-package gomesh
+package mesh
 
 type Concept struct {
 	UI                     UI     `xml:"ConceptUI"`
