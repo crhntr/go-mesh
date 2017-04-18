@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/crhntr/gomesh"
+	mesh "github.com/crhntr/go-mesh"
 )
 
 func TestParseDescriptorRecordSet(t *testing.T) {
@@ -14,7 +14,7 @@ func TestParseDescriptorRecordSet(t *testing.T) {
 		t.Error(err)
 	}
 
-	drc, errc := gomesh.ParseDescriptorRecordSet(f)
+	drc, errc := mesh.ParseDescriptorRecordSet(f)
 
 	count := 0
 	done := false
@@ -51,7 +51,7 @@ func TestParsePharmacologicalActionSet(t *testing.T) {
 		t.Error(err)
 	}
 
-	pac, errc := gomesh.ParsePharmacologicalActionSet(f)
+	pac, errc := mesh.ParsePharmacologicalActionSet(f)
 
 	count := 0
 	for {
@@ -91,7 +91,7 @@ func TestSupplementalRecordSet(t *testing.T) {
 		UI, Name, Created, Revised, Note, Frequency, Concepts, Sources, MappedTo bool
 	)
 
-	src, errc := gomesh.ParseSupplementalRecordSet(f)
+	src, errc := mesh.ParseSupplementalRecordSet(f)
 	count := 0
 	for {
 		if testing.Short() && count > 100 {
@@ -185,7 +185,7 @@ func TestParseQualifierRecordSet(t *testing.T) {
 		t.Error(err)
 	}
 
-	qrc, errc := gomesh.ParseQualifierRecordSet(f)
+	qrc, errc := mesh.ParseQualifierRecordSet(f)
 
 	count := 0
 	for {

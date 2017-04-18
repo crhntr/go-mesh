@@ -5,7 +5,7 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/crhntr/gomesh"
+	mesh "github.com/crhntr/go-mesh"
 )
 
 func TestDate_UnmarshalXML(t *testing.T) {
@@ -13,7 +13,7 @@ func TestDate_UnmarshalXML(t *testing.T) {
 	type TStruct struct {
 		XMLName  xml.Name `xml:"foo"`
 		Name     string
-		SomeDate gomesh.Date
+		SomeDate mesh.Date
 	}
 	v := TStruct{}
 	err := xml.Unmarshal(testXML, &v)
@@ -42,7 +42,7 @@ func TestDate_MarshalXML(t *testing.T) {
 	testXML := []byte(`<foo><SomeDate><Year>1999</Year><Month>07</Month><Day>01</Day></SomeDate></foo>`)
 	type Foo struct {
 		XMLName  xml.Name `xml:"foo"`
-		SomeDate gomesh.Date
+		SomeDate mesh.Date
 	}
 	v := Foo{}
 	if err := xml.Unmarshal(testXML, &v); err != nil {

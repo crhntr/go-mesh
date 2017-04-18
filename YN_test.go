@@ -4,16 +4,16 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/crhntr/gomesh"
+	mesh "github.com/crhntr/go-mesh"
 )
 
 func TestYN_XMLUnmarshal(t *testing.T) {
 	xmlData := [][]byte{[]byte(`<foo YesYN='Y' NoYN='N'></foo>`), []byte(`<foo YesYN='N' NoYN='Y'></foo>`)}
 
 	type Foo struct {
-		XMLName xml.Name  `xml:"foo"`
-		YesYN   gomesh.YN `xml:"YesYN,attr"`
-		NoYN    gomesh.YN `xml:"NoYN,attr"`
+		XMLName xml.Name `xml:"foo"`
+		YesYN   mesh.YN  `xml:"YesYN,attr"`
+		NoYN    mesh.YN  `xml:"NoYN,attr"`
 	}
 
 	v0 := Foo{}

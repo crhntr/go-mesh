@@ -4,14 +4,14 @@ import (
 	"encoding/xml"
 	"testing"
 
-	"github.com/crhntr/gomesh"
+	mesh "github.com/crhntr/go-mesh"
 )
 
 func TestUI(t *testing.T) {
 	testXML := []byte(`<foo><SomeUI>C114158</SomeUI></foo>`)
 	type TStruct struct {
-		XMLName xml.Name  `xml:"foo"`
-		UI      gomesh.UI `xml:"SomeUI"`
+		XMLName xml.Name `xml:"foo"`
+		UI      mesh.UI  `xml:"SomeUI"`
 	}
 	v := TStruct{}
 	err := xml.Unmarshal(testXML, &v)
