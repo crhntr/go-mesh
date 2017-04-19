@@ -21,8 +21,7 @@ func (date *Date) UnmarshalXML(d *xml.Decoder, start xml.StartElement) error {
 		dxml dateXML
 	)
 
-	err = d.DecodeElement(&dxml, &start)
-	if err != nil {
+	if err = d.DecodeElement(&dxml, &start); err != nil {
 		return err
 	}
 
