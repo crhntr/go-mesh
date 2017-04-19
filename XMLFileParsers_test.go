@@ -17,25 +17,20 @@ func TestParseDescriptorRecordSet(t *testing.T) {
 	drc, errc := mesh.ParseDescriptorRecordSet(f)
 
 	count := 0
-	done := false
-	for !done {
-		if testing.Short() && count > 100 {
-			return
-		}
-		if testing.Verbose() && count > 1000 {
-			return
-		}
-		if !testing.Verbose() && !testing.Short() && count > 200 {
+	for {
+		if (testing.Short() && count > 100) ||
+			(testing.Verbose() && count > 1000) ||
+			(!testing.Verbose() && !testing.Short() && count > 200) {
 			return
 		}
 
 		select {
-		case <-drc:
+		case dr := <-drc:
+			t.Log(dr)
 			count++
 		case err := <-errc:
 			if err == io.EOF {
 				close(errc)
-				done = true
 				break
 			} else {
 				t.Error(err)
@@ -55,13 +50,9 @@ func TestParsePharmacologicalActionSet(t *testing.T) {
 
 	count := 0
 	for {
-		if testing.Short() && count > 100 {
-			return
-		}
-		if testing.Verbose() && count > 1000 {
-			return
-		}
-		if !testing.Verbose() && !testing.Short() && count > 200 {
+		if (testing.Short() && count > 100) ||
+			(testing.Verbose() && count > 1000) ||
+			(!testing.Verbose() && !testing.Short() && count > 200) {
 			return
 		}
 
@@ -94,13 +85,9 @@ func TestSupplementalRecordSet(t *testing.T) {
 	src, errc := mesh.ParseSupplementalRecordSet(f)
 	count := 0
 	for {
-		if testing.Short() && count > 100 {
-			return
-		}
-		if testing.Verbose() && count > 1000 {
-			return
-		}
-		if !testing.Verbose() && !testing.Short() && count > 200 {
+		if (testing.Short() && count > 100) ||
+			(testing.Verbose() && count > 1000) ||
+			(!testing.Verbose() && !testing.Short() && count > 200) {
 			return
 		}
 
@@ -189,13 +176,9 @@ func TestParseQualifierRecordSet(t *testing.T) {
 
 	count := 0
 	for {
-		if testing.Short() && count > 100 {
-			return
-		}
-		if testing.Verbose() && count > 1000 {
-			return
-		}
-		if !testing.Verbose() && !testing.Short() && count > 200 {
+		if (testing.Short() && count > 100) ||
+			(testing.Verbose() && count > 1000) ||
+			(!testing.Verbose() && !testing.Short() && count > 200) {
 			return
 		}
 
