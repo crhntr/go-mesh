@@ -13,6 +13,6 @@ type Concept struct {
 
 type ConceptRelation struct {
 	Name string `xml:"RelationName,attr"`
-	C1   UI
-	C2   UI
+	C1   UI     `xml:"Concept1UI"`
+	C2   UI     `xml:"Concept2UI"`
 }
