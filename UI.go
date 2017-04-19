@@ -26,7 +26,7 @@ func (ui UI) Type() UIType {
 		return QualifierUI
 	case str[0] == 'T':
 		return TermUI
-	case str[0] == 'M':
+	case str[0] == 'M' || str[0] == 'C':
 		return ConceptUI
 	default:
 		return UnknownUI
