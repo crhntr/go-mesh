@@ -8,7 +8,7 @@ import (
 )
 
 func TestYN_XMLUnmarshal(t *testing.T) {
-	xmlData := [][]byte{[]byte(`<foo YesYN='Y' NoYN='N'></foo>`), []byte(`<foo YesYN='N' NoYN='Y'></foo>`)}
+	xmlData := [][]byte{[]byte(`<foo YesYN="Y" NoYN="N"></foo>`), []byte(`<foo YesYN="N" NoYN="Y"></foo>`)}
 
 	type Foo struct {
 		XMLName xml.Name `xml:"foo"`
@@ -40,5 +40,28 @@ func TestYN_XMLUnmarshal(t *testing.T) {
 
 	if v1.YesYN {
 		t.Error("YesYN should be false")
+	}
+}
+
+func TestYN_XMLMarshal(t *testing.T) {
+	type Foo struct {
+		XMLName xml.Name `xml:"foo"`
+		YesYN   mesh.YN  `xml:"YesYN,attr"`
+		NoYN    mesh.YN  `xml:"NoYN,attr"`
+	}
+
+	foo := Foo{
+		YesYN: true,
+		NoYN:  false,
+	}
+
+	res, err := xml.Marshal(foo)
+	if err != nil {
+		t.Error(err)
+	}
+
+	expected := "<foo YesYN=\"Y\" NoYN=\"N\"></foo>"
+	if expected != string(res) {
+		t.Errorf("expected %q got %q", expected, string(res))
 	}
 }
