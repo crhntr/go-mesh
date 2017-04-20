@@ -9,6 +9,7 @@ import (
 )
 
 func TestParseDescriptorRecordSet(t *testing.T) {
+	t.Parallel()
 	f, err := os.OpenFile("testdata/desc2017.xml", os.O_RDONLY, 0755)
 	if err != nil {
 		t.Error(err)
@@ -30,6 +31,7 @@ func TestParseDescriptorRecordSet(t *testing.T) {
 }
 
 func TestParsePharmacologicalActionSet(t *testing.T) {
+	t.Parallel()
 	f, err := os.OpenFile("testdata/pa2017.xml", os.O_RDONLY, 0755)
 	if err != nil {
 		t.Error(err)
@@ -51,6 +53,7 @@ func TestParsePharmacologicalActionSet(t *testing.T) {
 }
 
 func TestSupplementalRecordSet(t *testing.T) {
+	t.Parallel()
 	f, err := os.OpenFile("testdata/supp2017.xml", os.O_RDONLY, 0755)
 	if err != nil {
 		t.Fatal(err)
@@ -135,6 +138,7 @@ func TestSupplementalRecordSet(t *testing.T) {
 }
 
 func TestParseQualifierRecordSet(t *testing.T) {
+	t.Parallel()
 	f, err := os.OpenFile("testdata/qual2017.xml", os.O_RDONLY, 0755)
 	if err != nil {
 		t.Error(err)
